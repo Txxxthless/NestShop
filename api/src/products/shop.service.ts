@@ -29,7 +29,11 @@ export class ShopService {
   }
 
   async getProducts(query: ProductParams) {
-    let products = await this.productRepository.find();
+    let products = await this.productRepository.find({
+      relations: {
+        brand: true,
+      },
+    });
 
     if (query.brand) {
       products = products.filter(

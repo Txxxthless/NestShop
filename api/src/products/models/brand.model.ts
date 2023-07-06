@@ -13,7 +13,4 @@ export class Brand {
 
   @Column()
   name: string;
-
-  @OneToMany((type) => Product, (product) => product.brand)
-  products: Product[];
 }
