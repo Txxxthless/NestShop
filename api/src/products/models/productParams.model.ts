@@ -1,4 +1,4 @@
 export interface ProductParams {
-  name?: string;
+  search?: string;
   brand?: string;
 }

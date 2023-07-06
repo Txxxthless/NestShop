@@ -1,43 +1,52 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from 'src/products/models/product.interface';
-import { ProductParams } from 'src/products/models/productParams.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Product } from 'src/products/models/product.model';
+import { ProductParams } from 'src/products/models/productParams.model';
+import { Repository } from 'typeorm';
+import { Brand } from './models/brand.model';
+
+import { seedBrands, seedProducts } from './seed/seedData';
 
 @Injectable()
 export class ProductsService {
-  products: Product[] = [
-    {
-      name: 'Boots',
-      brand: 'Nike',
-      price: 120,
-      description: 'Hello world!',
-    },
-    {
-      name: 'Coat',
-      brand: 'Adidas',
-      price: 145,
-      description: 'Hello world!',
-    },
-  ];
+  constructor(
+    @InjectRepository(Product) private productRepository: Repository<Product>,
+    @InjectRepository(Brand) private brandRepository: Repository<Brand>,
+  ) {}
 
-  addProduct(product: Product) {
-    this.products.push(product);
+  seedData() {
+    this.brandRepository
+      .save(seedBrands)
+      .then(() => console.log('Brands seeded'));
+    this.productRepository
+      .save(seedProducts)
+      .then(() => console.log('Products seeded'));
   }
 
-  getProducts(query: ProductParams) {
-    let productsToReturn = this.products.slice();
+  addProduct(product: Product) {
+    console.log(product);
+    this.productRepository.save(product);
+  }
 
-    if (query.name) {
-      productsToReturn = this.products.filter(
-        (product) => product.name === query.name,
-      );
-    }
+  async getProducts(query: ProductParams) {
+    let products = await this.productRepository.find();
 
     if (query.brand) {
-      productsToReturn = productsToReturn.filter(
-        (product) => product.brand === query.brand,
+      products = products.filter(
+        (product) => product.brand.name === query.brand,
       );
     }
 
-    return productsToReturn;
+    if (query.search) {
+      products = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(query.search.toLowerCase()) ||
+          product.description
+            .toLowerCase()
+            .includes(query.search.toLowerCase()),
+      );
+    }
+
+    return products;
   }
 }
