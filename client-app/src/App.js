@@ -1,16 +1,16 @@
+import { useState } from "react";
 import "./App.css";
-import { useEffect } from "react";
-import { productsApi } from "./http/productsAPI";
+import { Navbar } from "./components/Navbar";
+import { Shop } from "./components/Shop";
 
 function App() {
-  useEffect(() => {
-    productsApi.getProducts(null, 'coat').then((result) => console.log(result));
-  });
-
   return (
-    <div className="container">
-      <h1>Wellcome to app</h1>
-    </div>
+    <>
+      <Navbar />
+      <div className="container" style={{ marginTop: "150px" }}>
+        <Shop />
+      </div>
+    </>
   );
 }
 

@@ -16,4 +16,9 @@ export class ShopController {
   addProduct(@Body() body: Product) {
     this.shopService.addProduct(body);
   }
+
+  @Get('brands')
+  getBrands() {
+    return this.shopService.getBrands();
+  }
 }

@@ -23,4 +23,4 @@ const getBrands = async () => {
   return data;
 };
 
-export const productsApi = { getProducts, getBrands };
+export const shopApi = { getProducts, getBrands };

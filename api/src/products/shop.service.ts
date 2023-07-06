@@ -53,4 +53,8 @@ export class ShopService {
 
     return products;
   }
+
+  async getBrands() {
+    return await this.brandRepository.find();
+  }
 }
