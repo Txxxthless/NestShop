@@ -8,7 +8,7 @@ import { Brand } from './models/brand.model';
 import { seedBrands, seedProducts } from './seed/seedData';
 
 @Injectable()
-export class ProductsService {
+export class ShopService {
   constructor(
     @InjectRepository(Product) private productRepository: Repository<Product>,
     @InjectRepository(Brand) private brandRepository: Repository<Brand>,

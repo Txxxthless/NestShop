@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
-import { ProductsModule } from './products/products.module';
+import { ShopModule } from './products/shop.module';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './products/models/product.model';
 import { Brand } from './products/models/brand.model';
 import { Repository } from 'typeorm';
-import { ProductsService } from './products/products.service';
+import { ShopService } from './products/shop.service';
 
 @Module({
   imports: [
-    ProductsModule,
+    ShopModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'shopdb.sqlite',
@@ -22,11 +22,11 @@ export class AppModule {
   constructor(
     @InjectRepository(Product) private productRepository: Repository<Product>,
     @InjectRepository(Brand) private brandRepository: Repository<Brand>,
-    private productsService: ProductsService,
+    private shopService: ShopService,
   ) {
     this.repositoriesEmpty().then((result) => {
       if (result) {
-        this.productsService.seedData();
+        this.shopService.seedData();
       }
     });
   }
