@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ShopModule } from './products/shop.module';
+import { ShopModule } from './shop/shop.module';
 import { InjectRepository, TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from './products/models/product.model';
-import { Brand } from './products/models/brand.model';
+import { Product } from './shop/models/product.model';
+import { Brand } from './shop/models/brand.model';
 import { Repository } from 'typeorm';
-import { ShopService } from './products/shop.service';
+import { ShopService } from './shop/shop.service';
 
 @Module({
   imports: [

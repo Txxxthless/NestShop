@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from 'src/products/models/product.model';
-import { ProductParams } from 'src/products/models/productParams.model';
+import { Product } from 'src/shop/models/product.model';
+import { ProductParams } from 'src/shop/models/productParams.model';
 import { Repository } from 'typeorm';
 import { Brand } from './models/brand.model';
 
