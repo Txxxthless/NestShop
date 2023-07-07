@@ -1,15 +1,18 @@
-import { useState } from "react";
 import "./App.css";
-import { Navbar } from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+import { Layout } from "./components/Layout";
 import { Shop } from "./components/Shop";
+import { HomePage } from "./components/HomePage";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <div className="container" style={{ marginTop: "150px" }}>
-        <Shop />
-      </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="shop" element={<Shop />} />
+          <Route index element={<HomePage />} />
+        </Route>
+      </Routes>
     </>
   );
 }
