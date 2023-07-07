@@ -8,20 +8,24 @@ import { ShopService } from './shop/shop.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ConfigModule } from '@nestjs/config';
+import { AccountModule } from './account/account.module';
+import { User } from './account/models/user.model';
 
 @Module({
   imports: [
     ShopModule,
+    AccountModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'shopdb.sqlite',
-      entities: [Product, Brand],
+      entities: [Product, Brand, User],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Product, Brand]),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'static'),
     }),
+    AccountModule,
   ],
 })
 export class AppModule {

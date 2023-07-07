@@ -5,7 +5,7 @@ export function ShopItem({ item }) {
     <div className="card" style={{ width: "18rem" }}>
       <img
         className="card-img-top"
-        src="https://illustoon.com/photo/dl/7266.png"
+        src={item.pictureUrl}
         alt="Card image cap"
       />
       <div className="card-body">
