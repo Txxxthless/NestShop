@@ -1,0 +1,4 @@
+export const jwtConstants = {
+  secret:
+    'AN AMAZINGLY SECRET AND A VERY COMPLEX PASSWORD THAT IS SAFE AND NOT KEPT IN SOURCE CODE',
+};

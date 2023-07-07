@@ -6,47 +6,53 @@ import {
 import { User } from './models/user.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AccountService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
-  async register(user: User) {
-    const userFromDb = await this.userRepository.findOneBy({
-      email: user.email,
+  async register(registerDto: User) {
+    const user = await this.userRepository.findOneBy({
+      email: registerDto.email,
     });
 
-    if (userFromDb) {
+    if (user) {
       return new BadRequestException(
         null,
         'User with same email already exists',
       );
     }
 
-    await this.userRepository.save(user);
-    /*
-     GENERATE JWT TOKEN
-     */
-    return 'super token!';
+    const createdUser = await this.userRepository.save(registerDto);
+
+    const payload = { sub: createdUser.id, name: createdUser.name };
+
+    return {
+      token: await this.jwtService.signAsync(payload),
+    };
   }
 
-  async login(user: User) {
-    const userFromDb = await this.userRepository.findOneBy({
-      email: user.email,
+  async login(loginDto: User) {
+    const user = await this.userRepository.findOneBy({
+      email: loginDto.email,
     });
 
-    if (!userFromDb) {
+    if (!user) {
       return new UnauthorizedException();
     }
 
-    if (userFromDb.password !== user.password) {
+    if (user.password !== loginDto.password) {
       return new UnauthorizedException();
     }
-    /*
-     GENERATE JWT TOKEN
-     */
-    return 'super token!';
+
+    const payload = { sub: user.id, name: user.name };
+
+    return {
+      token: await this.jwtService.signAsync(payload),
+    };
   }
 }
