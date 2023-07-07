@@ -5,6 +5,9 @@ import { Product } from './shop/models/product.model';
 import { Brand } from './shop/models/brand.model';
 import { Repository } from 'typeorm';
 import { ShopService } from './shop/shop.service';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -16,6 +19,9 @@ import { ShopService } from './shop/shop.service';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Product, Brand]),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+    }),
   ],
 })
 export class AppModule {

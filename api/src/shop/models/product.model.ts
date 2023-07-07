@@ -13,6 +13,9 @@ export class Product {
   brand: Brand;
 
   @Column()
+  pictureUrl: string;
+
+  @Column()
   price: number;
 
   @Column()
