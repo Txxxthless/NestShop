@@ -29,11 +29,7 @@ export class AccountService {
 
     const createdUser = await this.userRepository.save(registerDto);
 
-    const payload = { sub: createdUser.id, name: createdUser.name };
-
-    return {
-      token: await this.jwtService.signAsync(payload),
-    };
+    return this.createTokenAndSignInAsync(createdUser);
   }
 
   async login(loginDto: User) {
@@ -49,6 +45,10 @@ export class AccountService {
       return new UnauthorizedException();
     }
 
+    return this.createTokenAndSignInAsync(user);
+  }
+
+  private async createTokenAndSignInAsync(user: User) {
     const payload = { sub: user.id, name: user.name };
 
     return {
