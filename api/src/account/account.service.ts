@@ -39,18 +39,18 @@ export class AccountService {
     });
 
     if (!user) {
-      return new UnauthorizedException();
+      return new UnauthorizedException('Incorrect email or password');
     }
 
     if (user.password !== loginDto.password) {
-      return new UnauthorizedException();
+      return new UnauthorizedException('Incorrect email or password');
     }
 
     return this.createTokenAndSignInAsync(user);
   }
 
   private async createTokenAndSignInAsync(user: User) {
-    const payload = { sub: user.id, name: user.name };
+    const payload = { sub: user.id, email: user.email };
 
     return {
       email: user.email,

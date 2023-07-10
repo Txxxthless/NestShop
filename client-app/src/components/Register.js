@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export function Register() {
   const navigate = useNavigate();
 
+  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -17,7 +18,7 @@ export function Register() {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
   }
 
@@ -28,6 +29,7 @@ export function Register() {
           <div className="text-center mb-4">
             <h1 className="mb-3">Register</h1>
           </div>
+          {error ? <p className="text-danger mt-4">{error}</p> : <></>}
           <div className="d-grid">
             <input
               type="email"
