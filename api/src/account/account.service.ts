@@ -7,6 +7,7 @@ import { User } from './models/user.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { UserDto } from './models/userDto.model';
 
 @Injectable()
 export class AccountService {
@@ -15,7 +16,7 @@ export class AccountService {
     private jwtService: JwtService,
   ) {}
 
-  async register(registerDto: User) {
+  async register(registerDto: UserDto) {
     const user = await this.userRepository.findOneBy({
       email: registerDto.email,
     });
@@ -32,7 +33,7 @@ export class AccountService {
     return this.createTokenAndSignInAsync(createdUser);
   }
 
-  async login(loginDto: User) {
+  async login(loginDto: UserDto) {
     const user = await this.userRepository.findOneBy({
       email: loginDto.email,
     });
@@ -52,6 +53,7 @@ export class AccountService {
     const payload = { sub: user.id, name: user.name };
 
     return {
+      email: user.email,
       token: await this.jwtService.signAsync(payload),
     };
   }
