@@ -8,6 +8,12 @@ export function Navbar() {
         <Link to="/" className="p-2">
           Home
         </Link>
+        <Link to="/login" className="p-2">
+          Sign in
+        </Link>
+        <Link to="/register" className="p-2">
+          Register
+        </Link>
         <Link to="/shop" className="p-2">
           Shop
         </Link>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ShopItem } from "./ShopItem";
 import { shopApi } from "../http/shopApi";
 import { ShopSearch } from "./ShopSearch";
-import { ShopContext } from "./context";
+import { ShopContext } from "./context/context";
 
 export function Shop() {
   const [products, setProducts] = useState([]);
