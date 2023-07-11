@@ -9,6 +9,7 @@ import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { ShopContext } from "./components/context/context";
 import { User } from "./store/User";
+import { Account } from "./components/Account";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -34,6 +35,7 @@ function App() {
             <Route path="shop" element={<Shop />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="account" element={<Account />} />
           </Route>
         </Routes>
       </ShopContext.Provider>

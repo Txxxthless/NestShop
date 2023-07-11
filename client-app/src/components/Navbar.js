@@ -22,7 +22,7 @@ export const Navbar = observer(() => {
             </Link>
           </>
         ) : (
-          <Link to="/" className="p-2">
+          <Link to="/account" className="p-2">
             Account
           </Link>
         )}
