@@ -5,21 +5,23 @@ const api = axios.create({
 });
 
 const login = async (user) => {
-  const { data } = await api.post("login", user);
-  if (data.status) {
-    throw new Error(data.response.message);
+  try {
+    const { data } = await api.post("login", user);
+    cacheUser(data);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
   }
-  cacheUser(data);
-  return data;
 };
 
 const register = async (user) => {
-  const { data } = await api.post("register", user);
-  if (data.status) {
-    throw new Error(data.response.message);
+  try {
+    const { data } = await api.post("register", user);
+    cacheUser(data);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
   }
-  cacheUser(data);
-  return data;
 };
 
 const cacheUser = (user) => {

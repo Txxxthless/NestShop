@@ -24,7 +24,7 @@ export class AuthService {
     });
 
     if (user) {
-      return new BadRequestException(
+      throw new BadRequestException(
         null,
         'User with same email already exists',
       );
@@ -44,11 +44,11 @@ export class AuthService {
     });
 
     if (!user) {
-      return new UnauthorizedException('Incorrect email or password');
+      throw new UnauthorizedException('Incorrect email or password');
     }
 
     if (user.password !== loginDto.password) {
-      return new UnauthorizedException('Incorrect email or password');
+      throw new UnauthorizedException('Incorrect email or password');
     }
 
     return this.createTokenAndSignInAsync(user);
