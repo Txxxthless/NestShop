@@ -4,9 +4,13 @@ import { User } from './user.model';
 @Entity()
 export class Basket {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @OneToOne((type) => User, (user) => user.id)
   @JoinColumn()
   user: User;
+
+  constructor(user: User) {
+    this.user = user;
+  }
 }

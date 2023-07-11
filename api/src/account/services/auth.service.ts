@@ -3,16 +3,18 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { User } from './models/user.model';
+import { User } from '../models/user.model';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { UserDto } from './models/userDto.model';
+import { UserDto } from '../models/userDto.model';
+import { Basket } from '../models/basket.model';
 
 @Injectable()
-export class AccountService {
+export class AuthService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(Basket) private basketRepository: Repository<Basket>,
     private jwtService: JwtService,
   ) {}
 
@@ -29,6 +31,9 @@ export class AccountService {
     }
 
     const createdUser = await this.userRepository.save(registerDto);
+    const basket = new Basket(createdUser);
+
+    this.basketRepository.save(basket);
 
     return this.createTokenAndSignInAsync(createdUser);
   }

@@ -10,6 +10,8 @@ import { join } from 'path';
 import { ConfigModule } from '@nestjs/config';
 import { AccountModule } from './account/account.module';
 import { User } from './account/models/user.model';
+import { Basket } from './account/models/basket.model';
+import { Order } from './account/models/order.model';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { User } from './account/models/user.model';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'shopdb.sqlite',
-      entities: [Product, Brand, User],
+      entities: [Product, Brand, User, Basket, Order],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Product, Brand]),

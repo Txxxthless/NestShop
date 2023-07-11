@@ -5,11 +5,16 @@ import { Basket } from './basket.model';
 @Entity()
 export class Order {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @ManyToOne((type) => Product, (product) => product.id)
   product: Product;
 
   @ManyToOne((type) => Basket, (basket) => basket.id)
   basket: Basket;
+
+  constructor(basket: Basket, product: Product) {
+    this.product = product;
+    this.basket = basket;
+  }
 }
