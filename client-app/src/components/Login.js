@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { accountApi } from "../http/accountApi";
 import { useNavigate } from "react-router-dom";
+import { ShopContext } from "./context/context";
 
 export function Login() {
   const navigate = useNavigate();
+
+  const { user } = useContext(ShopContext);
 
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +16,8 @@ export function Login() {
     event.preventDefault();
     accountApi
       .login({ email, password })
-      .then(() => {
+      .then((data) => {
+        user.setUser(data);
         navigate("/");
       })
       .catch((error) => {

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { accountApi } from "../http/accountApi";
 import { useNavigate } from "react-router-dom";
+import { ShopContext } from "./context/context";
 
 export function Register() {
   const navigate = useNavigate();
+
+  const { user } = useContext(ShopContext);
 
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
@@ -14,7 +17,8 @@ export function Register() {
     event.preventDefault();
     accountApi
       .register({ email, password, name })
-      .then(() => {
+      .then((data) => {
+        user.setUser(data);
         navigate("/");
       })
       .catch((error) => {

@@ -17,13 +17,13 @@ export function ShopSearch() {
     });
   }, []);
 
-  function onSearch() {
+  const onSearch = () => {
     shopApi
       .getProducts(searchParams.brand, searchParams.search)
       .then((productsFromApi) => {
         shopContext.setProducts(productsFromApi);
       });
-  }
+  };
 
   return (
     <>

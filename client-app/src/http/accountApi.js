@@ -10,6 +10,7 @@ const login = async (user) => {
     throw new Error(data.response.message);
   }
   cacheUser(data);
+  return data;
 };
 
 const register = async (user) => {
@@ -18,6 +19,7 @@ const register = async (user) => {
     throw new Error(data.response.message);
   }
   cacheUser(data);
+  return data;
 };
 
 const cacheUser = (user) => {
@@ -28,4 +30,12 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
-export const accountApi = { login, register, logout };
+const getCurrentUser = () => {
+  const cachedUser = localStorage.getItem("user");
+  if (cachedUser) {
+    return JSON.parse(cachedUser);
+  }
+  return null;
+};
+
+export const accountApi = { login, register, logout, getCurrentUser };
