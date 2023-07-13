@@ -47,7 +47,11 @@ export const Navbar = observer(() => {
             >
               <li>
                 <h6 style={{ marginLeft: "10%" }}>Account menu</h6>
-                <Link to="/basket" class="dropdown-item mt-4">
+                <Link
+                  to="/basket"
+                  class="dropdown-item mt-4"
+                  onClick={() => setIsDropdownShown((value) => !value)}
+                >
                   View basket
                 </Link>
               </li>
