@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Basket } from '../models/basket.model';
 import { Order } from '../models/order.model';
 import { User } from '../models/user.model';
+import { OrderDto } from '../models/orderDto.model';
 
 @Injectable()
 export class BasketService {
@@ -35,7 +36,7 @@ export class BasketService {
       },
     });
 
-    const products = [];
+    const orderDtos = [];
 
     for (let i = 0; i < orders.length; i++) {
       const product = await this.productRepository.findOne({
@@ -44,10 +45,17 @@ export class BasketService {
           brand: true,
         },
       });
-      products.push(product);
+      orderDtos.push(
+        new OrderDto(
+          orders[i].id,
+          product.name,
+          product.price,
+          orders[i].quantity,
+        ),
+      );
     }
 
-    return products;
+    return orderDtos;
   }
 
   async addProduct(productId: number, requestUser: any) {
@@ -56,9 +64,22 @@ export class BasketService {
       requestUser,
     );
 
-    const order = new Order(basket, product);
+    let order = await this.orderRepository.findOne({
+      where: {
+        basket: basket,
+        product: product,
+      },
+    });
 
-    this.orderRepository.save(order);
+    if (order) {
+      order.quantity++;
+      this.orderRepository.save(order);
+      return;
+    }
+
+    order = new Order(basket, product, 1);
+
+    await this.orderRepository.save(order);
   }
 
   async removeProduct(productId: number, requestUser: any) {
@@ -70,7 +91,14 @@ export class BasketService {
     const order = await this.orderRepository.findOne({
       where: { basket, product },
     });
-    await this.orderRepository.remove(order);
+
+    if (order.quantity === 1) {
+      await this.orderRepository.remove(order);
+      return;
+    }
+
+    order.quantity--;
+    await this.orderRepository.save(order);
   }
 
   private async getRelations(productId: number, requestUser: any) {
