@@ -2,9 +2,16 @@ import { useContext } from "react";
 import { ShopItem } from "./ShopItem";
 import { ShopSearch } from "./ShopSearch";
 import { ShopContext } from "./context/context";
+import { basketApi } from "../http/basketApi";
 
 export function Shop() {
   const { products } = useContext(ShopContext);
+
+  const addItemToBasket = (id) => {
+    basketApi.addProduct(id).then(() => {
+      console.log("Success");
+    });
+  };
 
   return (
     <div className="row">
@@ -15,7 +22,11 @@ export function Shop() {
       <div className="col-9">
         <div className="row">
           {products.map((product) => (
-            <ShopItem item={product} key={product.id} />
+            <ShopItem
+              item={product}
+              key={product.id}
+              addItemToBasket={addItemToBasket}
+            />
           ))}
         </div>
       </div>

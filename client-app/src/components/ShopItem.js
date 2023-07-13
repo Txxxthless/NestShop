@@ -1,6 +1,6 @@
 import React from "react";
 
-export function ShopItem({ item }) {
+export function ShopItem({ item, addItemToBasket }) {
   return (
     <div className="card" style={{ width: "18rem" }}>
       <img
@@ -11,7 +11,14 @@ export function ShopItem({ item }) {
       <div className="card-body">
         <h5 className="card-title">{item.name}</h5>
         <p className="card-text">Brand: {item.brand.name}</p>
-        <a className="btn btn-primary">See more</a>
+        <button className="btn btn-primary">See more</button>
+        <button
+          className="btn btn-success"
+          style={{ marginLeft: "10px" }}
+          onClick={() => addItemToBasket(item.id)}
+        >
+          To basket
+        </button>
       </div>
     </div>
   );
