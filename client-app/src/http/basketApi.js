@@ -15,7 +15,7 @@ api.interceptors.request.use(authInterceptor);
 
 const addProduct = async (productId) => {
   try {
-    await api.post(`add?=${productId}`);
+    await api.post(`add?productId=${productId}`);
   } catch (error) {
     throw new Error(error.response.data.message);
   }
@@ -23,7 +23,7 @@ const addProduct = async (productId) => {
 
 const removeProduct = async (productId) => {
   try {
-    await api.post(`remove?=${productId}`);
+    await api.post(`remove?productId=${productId}`);
   } catch (error) {
     throw new Error(error.response.data.message);
   }

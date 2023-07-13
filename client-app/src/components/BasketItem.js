@@ -1,6 +1,6 @@
 import React from "react";
 
-export function BasketItem({ item }) {
+export function BasketItem({ item, removeItem }) {
   return (
     <li className="list-group-item">
       <div className="row">
@@ -12,7 +12,9 @@ export function BasketItem({ item }) {
           <strong style={{ fontStyle: "italic" }}> $ {item.price}</strong>
         </div>
         <div className="col-3 d-flex justify-content-end">
-          <button className="btn btn-danger">Remove item</button>
+          <button className="btn btn-danger" onClick={() => removeItem(item.id)}>
+            Remove item
+          </button>
         </div>
       </div>
     </li>

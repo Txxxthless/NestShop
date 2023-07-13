@@ -6,12 +6,21 @@ import { BasketItem } from "./BasketItem";
 export const Basket = observer(() => {
   const [basket, setBasket] = useState([]);
 
+  const removeItem = (id) => {
+    basketApi.removeProduct(id).then(() => {
+      basketApi.getBasket().then((data) => {
+        console.log(data);
+        setBasket(data);
+      });
+    });
+  };
+
   useEffect(() => {
     basketApi.getBasket().then((data) => {
       console.log(data);
       setBasket(data);
     });
-  }, []);
+  }, [setBasket]);
 
   return (
     <div className="row">
@@ -19,7 +28,7 @@ export const Basket = observer(() => {
       <div className="row mt-4">
         <ul className="list-group">
           {basket.map((item) => (
-            <BasketItem item={item} key={item.id} />
+            <BasketItem item={item} key={item.id} removeItem={removeItem} />
           ))}
         </ul>
       </div>
