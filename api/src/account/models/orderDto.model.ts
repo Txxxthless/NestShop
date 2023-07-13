@@ -4,5 +4,6 @@ export class OrderDto {
     public productName: string,
     public productPrice: number,
     public quantity: number,
+    public productId: number,
   ) {}
 }

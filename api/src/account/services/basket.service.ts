@@ -51,6 +51,7 @@ export class BasketService {
           product.name,
           product.price,
           orders[i].quantity,
+          product.id,
         ),
       );
     }
