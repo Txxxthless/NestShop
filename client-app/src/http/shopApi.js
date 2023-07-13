@@ -1,8 +1,4 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:5000/",
-});
+import { shopHost } from ".";
 
 const getProducts = async (brand, search) => {
   const params = {};
@@ -14,12 +10,12 @@ const getProducts = async (brand, search) => {
     params.search = search;
   }
 
-  const { data } = await api.get("products", { params });
+  const { data } = await shopHost.get("products", { params });
   return data;
 };
 
 const getBrands = async () => {
-  const { data } = await api.get("brands");
+  const { data } = await shopHost.get("brands");
   return data;
 };
 

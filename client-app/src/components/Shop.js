@@ -8,9 +8,7 @@ export function Shop() {
   const { products } = useContext(ShopContext);
 
   const addItemToBasket = (id) => {
-    basketApi.addProduct(id).then(() => {
-      console.log("Success");
-    });
+    basketApi.addProduct(id).catch((error) => console.log(error));
   };
 
   return (

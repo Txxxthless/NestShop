@@ -10,6 +10,8 @@ import { Register } from "./components/Register";
 import { ShopContext } from "./components/context/context";
 import { User } from "./store/User";
 import { Basket } from "./components/Basket";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -39,6 +41,7 @@ function App() {
           </Route>
         </Routes>
       </ShopContext.Provider>
+      <ToastContainer />
     </>
   );
 }

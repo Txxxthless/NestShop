@@ -1,36 +1,25 @@
-import axios from "axios";
-import { accountApi } from "./accountApi";
-
-const api = axios.create({
-  baseURL: "http://localhost:5000/basket/",
-});
-
-const authInterceptor = (config) => {
-  const currentUser = accountApi.getCurrentUser();
-  config.headers.authorization = `Bearer ${currentUser.token}`;
-  return config;
-};
-
-api.interceptors.request.use(authInterceptor);
+import { basketHost, notifySuccess } from ".";
 
 const addProduct = async (productId) => {
   try {
-    await api.post(`add?productId=${productId}`);
+    await basketHost.post(`add?productId=${productId}`);
+    notifySuccess("Product added");
   } catch (error) {
-    throw new Error(error.response.data.message);
+    console.log(error);
   }
 };
 
 const removeProduct = async (productId) => {
   try {
-    await api.post(`remove?productId=${productId}`);
+    await basketHost.post(`remove?productId=${productId}`);
+    notifySuccess("Product removed");
   } catch (error) {
-    throw new Error(error.response.data.message);
+    console.log(error);
   }
 };
 
 const getBasket = async (productId) => {
-  const { data } = await api.get("");
+  const { data } = await basketHost.get("");
   return data;
 };
 

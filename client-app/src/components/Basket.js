@@ -9,7 +9,6 @@ export const Basket = observer(() => {
   const removeItem = (id) => {
     basketApi.removeProduct(id).then(() => {
       basketApi.getBasket().then((data) => {
-        console.log(data);
         setBasket(data);
       });
     });
@@ -17,7 +16,6 @@ export const Basket = observer(() => {
 
   useEffect(() => {
     basketApi.getBasket().then((data) => {
-      console.log(data);
       setBasket(data);
     });
   }, [setBasket]);

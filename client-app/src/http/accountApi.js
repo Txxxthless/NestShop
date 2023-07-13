@@ -1,26 +1,24 @@
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:5000/account",
-});
+import { accountHost, notifySuccess } from ".";
 
 const login = async (user) => {
   try {
-    const { data } = await api.post("login", user);
+    const { data } = await accountHost.post("login", user);
     cacheUser(data);
+    notifySuccess("Signed in successfully");
     return data;
   } catch (error) {
-    throw new Error(error.response.data.message);
+    throw new Error(error);
   }
 };
 
 const register = async (user) => {
   try {
-    const { data } = await api.post("register", user);
+    const { data } = await accountHost.post("register", user);
     cacheUser(data);
+    notifySuccess("Registered successfully");
     return data;
   } catch (error) {
-    throw new Error(error.response.data.message);
+    throw new Error(error);
   }
 };
 
@@ -29,6 +27,7 @@ const cacheUser = (user) => {
 };
 
 const logout = () => {
+  notifySuccess("Logged out");
   localStorage.removeItem("user");
 };
 
