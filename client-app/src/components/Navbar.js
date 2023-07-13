@@ -20,9 +20,11 @@ export const Navbar = observer(() => {
         className="my-2 text-uppercase fs-4 d-flex justify-content-between"
         style={{ marginLeft: "30%", marginRight: "30%" }}
       >
-        <Link to="/" className="p-2">
-          Home
-        </Link>
+        <div>
+          <Link to="/" className="p-2">
+            Home
+          </Link>
+        </div>
         {!user.user ? (
           <div>
             <Link to="/login" className="p-2">
@@ -57,9 +59,11 @@ export const Navbar = observer(() => {
             </ul>
           </div>
         )}
-        <Link to="/shop" className="p-2">
-          Shop
-        </Link>
+        <div>
+          <Link to="/shop" className="p-2">
+            Shop
+          </Link>
+        </div>
       </nav>
     </header>
   );
