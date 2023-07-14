@@ -12,6 +12,7 @@ import { User } from "./store/User";
 import { Basket } from "./components/Basket";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ItemDetails } from "./components/ItemDetails";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="shop" element={<Shop />} />
+            <Route path="shop/:id" element={<ItemDetails />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="basket" element={<Basket />} />

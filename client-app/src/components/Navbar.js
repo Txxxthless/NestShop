@@ -10,8 +10,8 @@ export const Navbar = observer(() => {
   const [isDropdownShown, setIsDropdownShown] = useState(false);
 
   const logout = () => {
-    accountApi.logout();
     user.setUser(null);
+    accountApi.logout();
   };
 
   return (

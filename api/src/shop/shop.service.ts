@@ -28,6 +28,19 @@ export class ShopService {
     this.productRepository.save(product);
   }
 
+  async getProduct(id: number) {
+    const product = await this.productRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: {
+        brand: true,
+      },
+    });
+
+    return product;
+  }
+
   async getProducts(query: ProductParams) {
     let products = await this.productRepository.find({
       relations: {

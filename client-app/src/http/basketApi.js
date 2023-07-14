@@ -18,7 +18,7 @@ const removeProduct = async (productId) => {
   }
 };
 
-const getBasket = async (productId) => {
+const getBasket = async () => {
   const { data } = await basketHost.get("");
   return data;
 };

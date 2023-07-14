@@ -14,9 +14,14 @@ const getProducts = async (brand, search) => {
   return data;
 };
 
+const getProduct = async (id) => {
+  const { data } = await shopHost.get(`product?id=${id}`);
+  return data;
+};
+
 const getBrands = async () => {
   const { data } = await shopHost.get("brands");
   return data;
 };
 
-export const shopApi = { getProducts, getBrands };
+export const shopApi = { getProducts, getProduct, getBrands };

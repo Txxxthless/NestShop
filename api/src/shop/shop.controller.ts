@@ -21,4 +21,9 @@ export class ShopController {
   getBrands() {
     return this.shopService.getBrands();
   }
+
+  @Get('product')
+  getProduct(@Query() query) {
+    return this.shopService.getProduct(+query.id);
+  }
 }
