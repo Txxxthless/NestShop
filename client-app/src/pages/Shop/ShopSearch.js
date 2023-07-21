@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { shopApi } from "../../http/shopApi";
 import { ShopContext } from "../../components/context/context";
 import { Input } from "../../components/forms/Input";
+import { Select } from "../../components/forms/Select";
 
 export function ShopSearch() {
   const [brands, setBrands] = useState([]);
@@ -36,19 +37,13 @@ export function ShopSearch() {
           setSearchParams({ ...searchParams, search: value })
         }
       />
-      <h5 class="mt-4">Brands</h5>
-      <select
-        className="form-select mb-4 mt-4"
-        onChange={(event) =>
-          setSearchParams({ ...searchParams, brand: event.target.value })
-        }
-      >
-        {brands.map((brand) => (
-          <option value={brand.name} key={brand.id}>
-            {brand.name}
-          </option>
-        ))}
-      </select>
+      <h5 className="mt-4">Brands</h5>
+      <Select
+        items={brands}
+        onChange={(value) => {
+          setSearchParams({ ...searchParams, brand: value });
+        }}
+      />
       <button
         className="btn btn-primary mt-4"
         style={{ width: "100%" }}
