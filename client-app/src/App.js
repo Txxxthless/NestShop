@@ -13,6 +13,7 @@ import { ShopContext } from "./components/context/context";
 import { User } from "./store/User";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./assets/styles.css";
 
 function App() {
   const [products, setProducts] = useState([]);

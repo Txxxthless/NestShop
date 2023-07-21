@@ -46,7 +46,9 @@ export const Navbar = observer(() => {
               class={isDropdownShown ? "dropdown-menu show" : "dropdown-menu"}
             >
               <li>
-                <h6 style={{ marginLeft: "10%" }}>Account menu</h6>
+                <h6 style={{ marginLeft: "10%", color: "black" }}>
+                  Account menu
+                </h6>
                 <Link
                   to="/basket"
                   class="dropdown-item mt-4"

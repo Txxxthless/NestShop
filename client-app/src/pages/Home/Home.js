@@ -1,26 +1,18 @@
 import React from "react";
-import HomeImage from "../../assets/homepage.jpg";
 
 export function Home() {
   return (
     <div className="row" style={{ position: "relative" }}>
-      <img
-        src={HomeImage}
-        alt="Image"
-        className="shadow-lg"
-        style={{ padding: "0px" }}
-      />
-      <h1
-        style={{
-          marginLeft: "25%",
-          position: "absolute",
-          top: "25%",
-          fontSize: "4em",
-          color: "white",
-        }}
-      >
-        Wellcome to NestShop!
-      </h1>
+      <div className="home-content">
+        <h1>Wellcome to NestShop</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id
+          tempor turpis. Nulla at lacus justo. Vivamus imperdiet dignissim felis
+          id mollis. Nunc vel mattis felis. Quisque vestibulum sodales iaculis.
+          Nullam molestie massa in rhoncus tempor. Phasellus pretium sodales
+          metus, in tristique lacus gravida eget.
+        </p>
+      </div>
     </div>
   );
 }

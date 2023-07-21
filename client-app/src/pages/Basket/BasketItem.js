@@ -5,7 +5,7 @@ export function BasketItem({ item, removeItem }) {
     <li className="list-group-item">
       <div className="row">
         <div className="col-3">
-          <h5>{item.productName}</h5>
+          <h5 style={{ color: "black" }}>{item.productName}</h5>
         </div>
         <div className="col-3">
           Price:

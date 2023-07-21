@@ -20,9 +20,14 @@ export function ItemDetails() {
   return (
     <div className="row" style={{ position: "relative" }}>
       <div className="col-4">
-        <img src={item.pictureUrl} alt="Product" className="img-fluid" />
+        <img
+          src={item.pictureUrl}
+          alt="Product"
+          className="img-fluid"
+          style={{ borderRadius: "20px" }}
+        />
       </div>
-      <div className="col-5" style={{ fontSize: "1.4em" }}>
+      <div className="col-5" style={{ fontSize: "1.4em", color: "white" }}>
         <h2>{item.name}</h2>
         <p className="mt-4">Brand: {item.brand && item.brand.name}</p>
         <p className="mt-4" style={{ fontStyle: "italic" }}>

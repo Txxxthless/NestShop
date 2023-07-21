@@ -6,8 +6,10 @@ export function Layout() {
   return (
     <>
       <Navbar />
-      <div className="container" style={{ marginTop: "150px" }}>
-        <Outlet />
+      <div className="banner">
+        <div className="container">
+          <Outlet />
+        </div>
       </div>
     </>
   );
