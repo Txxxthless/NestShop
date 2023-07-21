@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { shopApi } from "../../http/shopApi";
 import { ShopContext } from "../../components/context/context";
+import { Input } from "../../components/forms/Input";
 
 export function ShopSearch() {
   const [brands, setBrands] = useState([]);
@@ -28,18 +29,16 @@ export function ShopSearch() {
   return (
     <>
       <h5>Seach</h5>
-      <input
+      <Input
         type="text"
-        className="form-control mb-4"
-        autoComplete="off"
         placeholder="Search..."
-        onChange={(event) =>
-          setSearchParams({ ...searchParams, search: event.target.value })
+        onChange={(value) =>
+          setSearchParams({ ...searchParams, search: value })
         }
       />
-      <h5>Brands</h5>
+      <h5 class="mt-4">Brands</h5>
       <select
-        className="form-select mb-4"
+        className="form-select mb-4 mt-4"
         onChange={(event) =>
           setSearchParams({ ...searchParams, brand: event.target.value })
         }
@@ -55,7 +54,7 @@ export function ShopSearch() {
         style={{ width: "100%" }}
         onClick={() => onSearch()}
       >
-        Seach
+        Search
       </button>
     </>
   );

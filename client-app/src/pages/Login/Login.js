@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { accountApi } from "../../http/accountApi";
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../../components/context/context";
+import { Input } from "../../components/forms/Input";
 
 export function Login() {
   const navigate = useNavigate();
@@ -34,21 +35,17 @@ export function Login() {
           </div>
           {error ? <p className="text-danger mt-4">{error}</p> : <></>}
           <div className="d-grid">
-            <input
-              name="email"
+            <Input
               type="email"
-              className="form-control"
-              autoComplete="off"
-              placeholder="Enter email"
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(value) => {
+                setEmail(value);
+              }}
             />
-            <input
-              name="password"
+            <Input
               type="password"
-              className="form-control mt-4"
-              autoComplete="off"
-              placeholder="Enter password"
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(value) => {
+                setPassword(value);
+              }}
             />
             <button type="sumbit" className="btn btn-lg btn-primary mt-3">
               Sign in
