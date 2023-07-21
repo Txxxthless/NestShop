@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShopContext } from "./context/context";
+import { ShopContext } from "../../components/context/context";
 
 export function ShopItem({ item, addItemToBasket }) {
   const navigate = useNavigate();

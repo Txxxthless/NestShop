@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { basketApi } from "../http/basketApi";
+import { basketApi } from "../../http/basketApi";
 import { useEffect, useState } from "react";
 import { BasketItem } from "./BasketItem";
 

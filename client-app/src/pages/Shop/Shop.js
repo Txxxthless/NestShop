@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ShopItem } from "./ShopItem";
 import { ShopSearch } from "./ShopSearch";
-import { ShopContext } from "./context/context";
-import { basketApi } from "../http/basketApi";
+import { ShopContext } from "../../components/context/context";
+import { basketApi } from "../../http/basketApi";
 
 export function Shop() {
   const { products } = useContext(ShopContext);

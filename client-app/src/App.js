@@ -3,16 +3,16 @@ import { shopApi } from "./http/shopApi";
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "./layouts/Layout";
-import { Shop } from "./components/Shop";
-import { HomePage } from "./components/HomePage";
-import { Login } from "./components/Login";
-import { Register } from "./components/Register";
+import { HomePage } from "./pages/Home";
+import { ShopPage } from "./pages/Shop";
+import { BasketPage } from "./pages/Basket";
+import { LoginPage } from "./pages/Login";
+import { RegisterPage } from "./pages/Register";
+import { ItemDetailsPage } from "./pages/ItemDetails";
 import { ShopContext } from "./components/context/context";
 import { User } from "./store/User";
-import { Basket } from "./components/Basket";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ItemDetails } from "./components/ItemDetails";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -35,11 +35,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="shop" element={<Shop />} />
-            <Route path="shop/:id" element={<ItemDetails />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="basket" element={<Basket />} />
+            <Route path="shop" element={<ShopPage />} />
+            <Route path="shop/:id" element={<ItemDetailsPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+            <Route path="basket" element={<BasketPage />} />
           </Route>
         </Routes>
       </ShopContext.Provider>

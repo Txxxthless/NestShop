@@ -1,7 +1,7 @@
 import React from "react";
-import HomeImage from "../assets/homepage.jpg";
+import HomeImage from "../../assets/homepage.jpg";
 
-export function HomePage() {
+export function Home() {
   return (
     <div className="row" style={{ position: "relative" }}>
       <img

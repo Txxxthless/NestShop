@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { accountApi } from "../http/accountApi";
+import { accountApi } from "../../http/accountApi";
 import { useNavigate } from "react-router-dom";
-import { ShopContext } from "./context/context";
+import { ShopContext } from "../../components/context/context";
 
-export function Register() {
+export function Login() {
   const navigate = useNavigate();
 
   const { user } = useContext(ShopContext);
@@ -11,12 +11,11 @@ export function Register() {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
 
-  function register(event) {
+  function login(event) {
     event.preventDefault();
     accountApi
-      .register({ email, password, name })
+      .login({ email, password })
       .then((data) => {
         user.setUser(data);
         navigate("/");
@@ -29,13 +28,14 @@ export function Register() {
   return (
     <div className="d-flex justify-content-center mt-5">
       <div className="col-3">
-        <form onSubmit={(event) => register(event)}>
+        <form onSubmit={(event) => login(event)}>
           <div className="text-center mb-4">
-            <h1 className="mb-3">Register</h1>
+            <h1 className="mb-3">Sign in</h1>
           </div>
           {error ? <p className="text-danger mt-4">{error}</p> : <></>}
           <div className="d-grid">
             <input
+              name="email"
               type="email"
               className="form-control"
               autoComplete="off"
@@ -43,13 +43,7 @@ export function Register() {
               onChange={(event) => setEmail(event.target.value)}
             />
             <input
-              type="text"
-              className="form-control mt-4"
-              autoComplete="off"
-              placeholder="Enter name"
-              onChange={(event) => setName(event.target.value)}
-            />
-            <input
+              name="password"
               type="password"
               className="form-control mt-4"
               autoComplete="off"
@@ -57,7 +51,7 @@ export function Register() {
               onChange={(event) => setPassword(event.target.value)}
             />
             <button type="sumbit" className="btn btn-lg btn-primary mt-3">
-              Register
+              Sign in
             </button>
           </div>
         </form>

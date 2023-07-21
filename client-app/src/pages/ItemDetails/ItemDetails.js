@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { shopApi } from "../http/shopApi";
-import { basketApi } from "../http/basketApi";
-import { ShopContext } from "./context/context";
+import { shopApi } from "../../http/shopApi";
+import { basketApi } from "../../http/basketApi";
+import { ShopContext } from "../../components/context/context";
 
 export function ItemDetails() {
   const { id } = useParams();

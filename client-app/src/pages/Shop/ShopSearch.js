@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { shopApi } from "../http/shopApi";
-import { ShopContext } from "./context/context";
+import { shopApi } from "../../http/shopApi";
+import { ShopContext } from "../../components/context/context";
 
 export function ShopSearch() {
   const [brands, setBrands] = useState([]);
