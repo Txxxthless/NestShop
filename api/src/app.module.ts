@@ -12,6 +12,7 @@ import { AccountModule } from './account/account.module';
 import { User } from './account/models/user.model';
 import { Basket } from './account/models/basket.model';
 import { Order } from './account/models/order.model';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { Order } from './account/models/order.model';
       rootPath: join(__dirname, '..', 'static'),
     }),
     AccountModule,
+    PaymentModule,
   ],
 })
 export class AppModule {

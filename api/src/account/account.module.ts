@@ -10,6 +10,7 @@ import { BasketService } from './services/basket.service';
 import { Basket } from './models/basket.model';
 import { Order } from './models/order.model';
 import { Product } from 'src/shop/models/product.model';
+import { AuthGuard } from './guards/auth.guard';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { Product } from 'src/shop/models/product.model';
     }),
   ],
   controllers: [AuthController, BasketController],
-  providers: [AuthService, BasketService],
+  providers: [AuthService, BasketService, AuthGuard],
+  exports: [AuthGuard],
 })
 export class AccountModule {}
