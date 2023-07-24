@@ -39,3 +39,10 @@ export const accountHost = axios.create({
 });
 
 accountHost.interceptors.response.use(null, errorInterceptor);
+
+export const paymentHost = axios.create({
+  baseURL: "http://localhost:5000/payment",
+});
+
+paymentHost.interceptors.request.use(authInterceptor);
+paymentHost.interceptors.response.use(null, errorInterceptor);

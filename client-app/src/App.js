@@ -9,6 +9,7 @@ import { BasketPage } from "./pages/Basket";
 import { LoginPage } from "./pages/Login";
 import { RegisterPage } from "./pages/Register";
 import { ItemDetailsPage } from "./pages/ItemDetails";
+import { PaymentSuccessPage } from "./pages/PaymentSuccess";
 import { ShopContext } from "./components/context/context";
 import { User } from "./store/User";
 import { ToastContainer } from "react-toastify";
@@ -41,6 +42,7 @@ function App() {
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
             <Route path="basket" element={<BasketPage />} />
+            <Route path="payment-success" element={<PaymentSuccessPage />} />
           </Route>
         </Routes>
       </ShopContext.Provider>
