@@ -38,19 +38,14 @@ export class BasketService {
 
     const orderDtos = [];
 
-    for (let i = 0; i < orders.length; i++) {
-      const product = await this.productRepository.findOne({
-        where: { id: orders[i].product.id },
-        relations: {
-          brand: true,
-        },
-      });
+    for (let order of orders) {
+      const product = order.product;
       orderDtos.push(
         new OrderDto(
-          orders[i].id,
+          order.id,
           product.name,
           product.price,
-          orders[i].quantity,
+          order.quantity,
           product.id,
         ),
       );
