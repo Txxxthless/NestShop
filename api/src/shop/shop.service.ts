@@ -4,6 +4,7 @@ import { Product } from 'src/shop/models/product.model';
 import { ProductParams } from 'src/shop/models/productParams.model';
 import { Repository } from 'typeorm';
 import { Brand } from './models/brand.model';
+import { PAGE_SIZE } from './constants/constants';
 
 import { seedBrands, seedProducts } from './seed/seedData';
 
@@ -42,27 +43,33 @@ export class ShopService {
   }
 
   async getProducts(query: ProductParams) {
-    let products = await this.productRepository.find({
-      relations: {
-        brand: true,
-      },
-    });
+    const queryBuilder = this.productRepository.createQueryBuilder('product');
+
+    queryBuilder.innerJoinAndSelect('product.brand', 'brand');
 
     if (query.brand) {
-      products = products.filter(
-        (product) => product.brand.name === query.brand,
-      );
+      queryBuilder.where('LOWER(brand.name) = :brandName', {
+        brandName: query.brand.toLowerCase(),
+      });
     }
 
     if (query.search) {
-      products = products.filter(
-        (product) =>
-          product.name.toLowerCase().includes(query.search.toLowerCase()) ||
-          product.description
-            .toLowerCase()
-            .includes(query.search.toLowerCase()),
-      );
+      if (query.brand) {
+        queryBuilder.andWhere('LOWER(product.name) LIKE :name', {
+          name: `%${query.search.toLowerCase()}%`,
+        });
+      } else {
+        queryBuilder.where('LOWER(product.name) LIKE :name', {
+          name: `%${query.search.toLowerCase()}%`,
+        });
+      }
     }
+
+    if (query.page) {
+      queryBuilder.skip((query.page - 1) * PAGE_SIZE);
+    }
+
+    let products = await queryBuilder.take(PAGE_SIZE).getMany();
 
     return products;
   }
